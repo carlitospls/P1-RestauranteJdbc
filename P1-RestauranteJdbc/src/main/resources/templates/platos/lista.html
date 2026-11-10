@@ -26,12 +26,13 @@
         </thead>
         <tbody>
         <tr th:if="${#lists.isEmpty(platos)}">
-            <td colspan="6" class="suave">No hay platos</td>
+            <td colspan="7" class="suave">No hay platos</td>
         </tr>
         <tr th:each="p : ${platos}">
             <td th:text="${p.codigo}">1</td>
             <td th:text="${p.nombre}">Nombre</td>
             <td th:text="${#numbers.formatDecimal(p.precio, 1, 2, 'POINT')} + ' €'">0.00</td>
+            <td th:text="${p.calorias} + ' cal'">0</td>
             <td th:text="${p.categoria.nombre}">Categoría</td>
             <td>
                 <a th:href="@{/platos/editar/{codigo}(codigo=${p.codigo})}" class="boton amarillo">Editar</a>

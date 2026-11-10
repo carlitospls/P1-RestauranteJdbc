@@ -26,6 +26,12 @@
         </div>
 
         <div class="campo">
+            <label for="calorias">Calorías</label>
+            <input type="number" th:field="*{calorias}" th:classappend="${#fields.hasErrors('calorias')} ? 'invalido'">
+            <div class="error" th:if="${#fields.hasErrors('calorias')}" th:errors="*{calorias}">Error</div>
+        </div>
+
+        <div class="campo">
             <label for="codigoCategoria">Categoría</label>
             <select th:field="*{codigoCategoria}" th:classappend="${#fields.hasErrors('codigoCategoria')} ? 'invalido'">
                 <option value="">-- Selecciona una categoría --</option>
