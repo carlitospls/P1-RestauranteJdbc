@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Plato')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="contenedor estrecho">
+    <h1 th:text="${platoForm.codigo == null} ? 'Nuevo plato' : ('Editar plato ' + ${platoForm.codigo})">
+        Plato
+    </h1>
+
+    <form th:action="@{/platos/guardar}" th:object="${platoForm}" method="post" class="formulario" novalidate>
+
+        <input type="hidden" th:field="*{codigo}">
+
+        <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input type="text" th:field="*{nombre}" th:classappend="${#fields.hasErrors('nombre')} ? 'invalido'">
+            <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error</div>
+        </div>
+
+        <div class="campo">
+            <label for="precio">Precio (€)</label>
+            <input type="number" step="0.01" th:field="*{precio}" th:classappend="${#fields.hasErrors('precio')} ? 'invalido'">
+            <div class="error" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}">Error</div>
+        </div>
+
+        <div class="campo">
+            <label for="codigoCategoria">Categoría</label>
+            <select th:field="*{codigoCategoria}" th:classappend="${#fields.hasErrors('codigoCategoria')} ? 'invalido'">
+                <option value="">-- Selecciona una categoría --</option>
+                <option th:each="c : ${categorias}" th:value="${c.codigo}" th:text="${c.nombre}">Categoría</option>
+            </select>
+            <div class="error" th:if="${#fields.hasErrors('codigoCategoria')}" th:errors="*{codigoCategoria}">Error</div>
+        </div>
+
+        <div class="acciones">
+            <button type="submit" class="boton azul">Guardar</button>
+            <a th:href="@{/platos}" class="boton gris">Cancelar</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

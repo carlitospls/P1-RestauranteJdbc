@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Inicio')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="contenedor">
+    <h1>La Tasca</h1>
+    <p class="suave">Gestión de la carta del restaurante</p>
+    <div class="tarjetas">
+        <a class="tarjeta" th:href="@{/platos}">
+            <h2>Platos</h2>
+            <p>Consulta, añade, edita o borra platos de la carta.</p>
+        </a>
+        <a class="tarjeta" th:href="@{/categorias}">
+            <h2>Categorías</h2>
+            <p>Lista de categorías de la carta.</p>
+        </a>
+    </div>
+</main>
+</body>
+</html>

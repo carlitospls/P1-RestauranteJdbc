@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Platos')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="contenedor">
+    <div class="cabecera">
+        <h1>Platos</h1>
+        <a th:href="@{/platos/nuevo}" class="boton verde">+ Añadir plato</a>
+    </div>
+
+    <div th:replace="~{fragments/layout :: alertas}"></div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Calorías</th>
+            <th>Categoría</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(platos)}">
+            <td colspan="6" class="suave">No hay platos</td>
+        </tr>
+        <tr th:each="p : ${platos}">
+            <td th:text="${p.codigo}">1</td>
+            <td th:text="${p.nombre}">Nombre</td>
+            <td th:text="${#numbers.formatDecimal(p.precio, 1, 2, 'POINT')} + ' €'">0.00</td>
+            <td th:text="${p.categoria.nombre}">Categoría</td>
+            <td>
+                <a th:href="@{/platos/editar/{codigo}(codigo=${p.codigo})}" class="boton amarillo">Editar</a>
+            </td>
+            <td>
+                <form th:action="@{/platos/borrar/{codigo}(codigo=${p.codigo})}" method="post"
+                      onsubmit="return confirm('¿Seguro que quieres borrar este plato?');">
+                    <button type="submit" class="boton rojo">Borrar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
