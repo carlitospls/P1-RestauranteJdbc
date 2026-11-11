@@ -17,7 +17,7 @@ public class PlatoForm {
     private Integer codigo;            // null = alta, con valor = edición
 
     @NotBlank(message = "El nombre es obligatorio")
-    @Size(min = 3, max = 100, message = "Máximo 100 caracteres")
+    @Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres")
     private String nombre;
 
     @NotNull(message = "El precio es obligatorio")

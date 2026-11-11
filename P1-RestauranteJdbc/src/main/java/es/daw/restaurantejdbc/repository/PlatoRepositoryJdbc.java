@@ -79,7 +79,7 @@ public class PlatoRepositoryJdbc implements PlatoRepository {
 
     @Override
     public void update(Plato plato) {
-        String sql = "UPDATE plato SET nombre = ?, precio = ?, codigo_categoria = ? WHERE codigo = ?";
+        String sql = "UPDATE plato SET nombre = ?, precio = ?, calorias = ?, codigo_categoria = ? WHERE codigo = ?";
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, plato.getNombre());
