@@ -59,12 +59,13 @@ public class PlatoRepositoryJdbc implements PlatoRepository {
 
     @Override
     public void save(Plato plato) {
-        String sql = "INSERT INTO plato (nombre, precio, codigo_categoria) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO plato (nombre, precio, calorias, codigo_categoria) VALUES (?, ?, ?, ?)";
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, plato.getNombre());
             ps.setDouble(2, plato.getPrecio());
-            ps.setInt(3, plato.getCategoria().getCodigo());
+            ps.setInt(3, plato.getCalorias());
+            ps.setInt(4, plato.getCategoria().getCodigo());
             ps.executeUpdate();
             try (ResultSet claves = ps.getGeneratedKeys()) {
                 if (claves.next()) {
@@ -83,8 +84,9 @@ public class PlatoRepositoryJdbc implements PlatoRepository {
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, plato.getNombre());
             ps.setDouble(2, plato.getPrecio());
-            ps.setInt(3, plato.getCategoria().getCodigo());
-            ps.setInt(4, plato.getCodigo());
+            ps.setInt(3, plato.getCalorias());
+            ps.setInt(4, plato.getCategoria().getCodigo());
+            ps.setInt(5, plato.getCodigo());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new AccesoDatosException("Error al actualizar el plato " + plato.getCodigo(), e);

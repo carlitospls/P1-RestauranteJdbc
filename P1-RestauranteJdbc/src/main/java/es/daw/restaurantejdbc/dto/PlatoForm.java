@@ -28,7 +28,7 @@ public class PlatoForm {
     private Integer codigoCategoria;
 
     @NotNull(message = "Las calorías son obligatorias")
-    @NegativeOrZero(message = "Las calorías no pueden ser negativas")
+    @PositiveOrZero(message = "Las calorías no pueden ser negativas")
     private Integer calorias;
 
     /** Plato (modelo) → formulario. Se usa al editar. */

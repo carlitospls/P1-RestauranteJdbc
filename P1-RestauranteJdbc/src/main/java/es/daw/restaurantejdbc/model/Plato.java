@@ -18,4 +18,6 @@ public class Plato {
     private double precio;
     private Integer calorias;
     private Categoria categoria;
+
+
 }
